@@ -66,7 +66,8 @@ public class CollegeServiceImpl implements CollegeService {
 
     @Override
     public ApiResponse getCollegeByName(String collegeName) {
-        College college = collegeRepository.findByCollegeName(collegeName).getFirst();
+        College college = collegeRepository.findByCollegeName(collegeName)
+                .orElseThrow(() -> new CollegeNotFoundException("College not found with name: " + collegeName));
         return new ApiResponse(
                 HttpStatus.OK.value(),
                 "College retrieved successfully",
