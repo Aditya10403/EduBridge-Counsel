@@ -3,6 +3,7 @@ package com.ECounselling.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "College")
 public class College {
 
     @Id

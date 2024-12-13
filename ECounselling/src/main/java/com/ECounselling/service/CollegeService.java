@@ -12,5 +12,5 @@ public interface CollegeService {
     ApiResponse updateCollegeById(Long collegeId, College c);
     ApiResponse getCollegeByName(String collegeName);
     ApiResponse deleteCollegeById(Long collegeId);
-    ApiResponse updateStatus(Long collegeId, College c);
+    ApiResponse toggleCollegeStatus(Long collegeId, College c);
 }

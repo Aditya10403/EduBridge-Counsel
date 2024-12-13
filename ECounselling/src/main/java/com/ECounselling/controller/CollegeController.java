@@ -64,12 +64,4 @@ public class CollegeController {
         ApiResponse response = collegeService.deleteCollegeById(collegeId);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
-
-    @PutMapping("/updateStatus/{collegeId}")
-    public ResponseEntity<ApiResponse> updateStatus(
-            @PathVariable("collegeId") Long collegeId,
-            @RequestBody College college) {
-        ApiResponse response = collegeService.updateStatus(collegeId, college);
-        return ResponseEntity.status(response.getStatusCode()).body(response);
-    }
 }

@@ -26,4 +26,13 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(error.getStatusCode()).body(error);
     }
+
+    @ExceptionHandler(StudentNotFoundException.class)
+    public ResponseEntity<ApiError> handleStudentNotFoundException(Exception e) {
+        ApiError error = new ApiError(
+                HttpStatus.NOT_FOUND.value(),
+                e.getMessage()
+        );
+        return ResponseEntity.status(error.getStatusCode()).body(error);
+    }
 }

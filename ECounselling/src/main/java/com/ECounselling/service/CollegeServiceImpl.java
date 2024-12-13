@@ -88,15 +88,14 @@ public class CollegeServiceImpl implements CollegeService {
     }
 
     @Override
-    public ApiResponse updateStatus(Long collegeId, College c) {
+    public ApiResponse toggleCollegeStatus(Long collegeId, College c) {
         College college = collegeRepository.findById(collegeId)
                 .orElseThrow(() -> new CollegeNotFoundException("College not found with ID: " + collegeId));
-
-        college.setStatus(c.getStatus());
+        college.setStatus(!college.getStatus());
         College updatedCollege = collegeRepository.save(college);
         return new ApiResponse(
                 HttpStatus.OK.value(),
-                "College status updated successfully",
+                college.getStatus() ? "College unblocked successfully" : "College blocked successfully",
                 updatedCollege
         );
     }
