@@ -3,7 +3,7 @@ spring:
     name: ECounselling
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
   datasource:
     url:  jdbc:mysql://localhost:3306/aec

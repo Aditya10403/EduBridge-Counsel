@@ -3,7 +3,6 @@ package com.ECounselling.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Student")
 public class Student {
 
     @Id
@@ -18,6 +17,23 @@ public class Student {
     private String mailId;
     private Double tenthMarks;
     private Double twelveMarks;
+    private Integer erank;
+
+    public Student() {
+    }
+
+    public Student(Long id, String studentName, String contactNumber, String address, String board, String schoolName, String mailId, Double tenthMarks, Double twelveMarks, Integer rank) {
+        this.id = id;
+        this.studentName = studentName;
+        this.contactNumber = contactNumber;
+        this.address = address;
+        this.board = board;
+        this.schoolName = schoolName;
+        this.mailId = mailId;
+        this.tenthMarks = tenthMarks;
+        this.twelveMarks = twelveMarks;
+        this.erank = rank;
+    }
 
     public Long getId() {
         return id;
@@ -89,5 +105,13 @@ public class Student {
 
     public void setTwelveMarks(Double twelveMarks) {
         this.twelveMarks = twelveMarks;
+    }
+
+    public Integer getErank() {
+        return erank;
+    }
+
+    public void setErank(Integer erank) {
+        this.erank = erank;
     }
 }

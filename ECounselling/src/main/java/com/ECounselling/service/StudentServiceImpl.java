@@ -76,5 +76,6 @@ public class StudentServiceImpl implements StudentService {
         existingStudent.setMailId(student.getMailId());
         existingStudent.setTenthMarks(student.getTenthMarks());
         existingStudent.setTwelveMarks(student.getTwelveMarks());
+        existingStudent.setErank(student.getErank());
     }
 }
