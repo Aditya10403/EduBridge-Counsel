@@ -1,6 +1,8 @@
 package com.ECounselling.controller;
 
+import com.ECounselling.exception.CollegeNotFoundException;
 import com.ECounselling.model.College;
+import com.ECounselling.model.Department;
 import com.ECounselling.response.ApiResponse;
 import com.ECounselling.service.CollegeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,9 @@ public class CollegeController {
     private CollegeService collegeService;
 
     @PostMapping("/add")
-    public ResponseEntity<ApiResponse> addCollege(@RequestBody College c) {
+    public ResponseEntity<ApiResponse> addCollege(@RequestBody College college) {
         try {
-            ApiResponse response = collegeService.addCollege(c);
+            ApiResponse response = collegeService.addCollege(college);
             return ResponseEntity.status(response.getStatusCode()).body(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -64,4 +66,29 @@ public class CollegeController {
         ApiResponse response = collegeService.deleteCollegeById(collegeId);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
+
+    @PostMapping("/{collegeId}/department/add")
+    public ResponseEntity<ApiResponse> addDepartmentToCollege(@PathVariable Long collegeId, @RequestBody Department department) {
+        try {
+            ApiResponse response = collegeService.addDepartmentToCollege(collegeId, department);
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        } catch (CollegeNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ApiResponse(HttpStatus.NOT_FOUND.value(), e.getMessage(), null)
+            );
+        }
+    }
+
+    @GetMapping("/{collegeId}/departments")
+    public ResponseEntity<ApiResponse> getAllDepartmentsByCollege(@PathVariable Long collegeId) {
+        try {
+            ApiResponse response = collegeService.getAllDepartmentsByCollege(collegeId);
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        } catch (CollegeNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ApiResponse(HttpStatus.NOT_FOUND.value(), e.getMessage(), null)
+            );
+        }
+    }
+
 }

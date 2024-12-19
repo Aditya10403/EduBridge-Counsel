@@ -2,7 +2,9 @@ package com.ECounselling.service;
 
 import com.ECounselling.exception.CollegeNotFoundException;
 import com.ECounselling.model.College;
+import com.ECounselling.model.Department;
 import com.ECounselling.repository.CollegeRepository;
+import com.ECounselling.repository.DepartmentRepository;
 import com.ECounselling.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,9 @@ public class CollegeServiceImpl implements CollegeService {
 
     @Autowired
     private CollegeRepository collegeRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     @Override
     public ApiResponse addCollege(College c) {
@@ -97,6 +102,34 @@ public class CollegeServiceImpl implements CollegeService {
                 HttpStatus.OK.value(),
                 college.getStatus() ? "College unblocked successfully" : "College blocked successfully",
                 updatedCollege
+        );
+    }
+
+    @Override
+    public ApiResponse addDepartmentToCollege(Long collegeId, Department department) {
+        College college = collegeRepository.findById(collegeId)
+                .orElseThrow(() -> new CollegeNotFoundException("College not found with ID: " + collegeId));
+
+        department.setCollege(college);
+        Department savedDepartment = departmentRepository.save(department);
+
+        return new ApiResponse(
+                HttpStatus.CREATED.value(),
+                "Department added to college successfully",
+                savedDepartment
+        );
+    }
+
+    @Override
+    public ApiResponse getAllDepartmentsByCollege(Long collegeId) {
+        College college = collegeRepository.findById(collegeId)
+                .orElseThrow(() -> new CollegeNotFoundException("College not found with ID: " + collegeId));
+
+        List<Department> departments = college.getDepartments();
+        return new ApiResponse(
+                HttpStatus.OK.value(),
+                "Departments retrieved successfully",
+                departments
         );
     }
 }
