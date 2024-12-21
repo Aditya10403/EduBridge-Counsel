@@ -1,5 +1,6 @@
 package com.ECounselling.controller;
 
+import com.ECounselling.model.Department;
 import com.ECounselling.model.Student;
 import com.ECounselling.service.StudentService;
 import com.ECounselling.response.ApiResponse;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/student")
@@ -57,4 +59,11 @@ public class StudentController {
         ApiResponse response = studentService.verifyMail(mailId);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
+
+    @GetMapping("/departments/by-erank/{erank}")
+    public ResponseEntity<List<Map<String, Object>>> getDepartmentsByERank(@PathVariable("erank") Integer erank) {
+        List<Map<String, Object>> departmentsWithCollege = studentService.getDepartmentsByERank(erank);
+        return ResponseEntity.ok(departmentsWithCollege);
+    }
+
 }

@@ -1,20 +1,29 @@
 package com.ECounselling.service;
 
 import com.ECounselling.exception.StudentNotFoundException;
+import com.ECounselling.model.College;
+import com.ECounselling.model.Department;
 import com.ECounselling.model.Student;
+import com.ECounselling.repository.DepartmentRepository;
 import com.ECounselling.repository.StudentRepository;
 import com.ECounselling.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     @Override
     public ApiResponse addStudentData(Student student) {
@@ -67,6 +76,30 @@ public class StudentServiceImpl implements StudentService {
                 exists
         );
     }
+
+    @Override
+    public List<Map<String, Object>> getDepartmentsByERank(Integer erank) {
+        List<Department> departments = departmentRepository.findDepartmentsByCutoffRank(erank);
+
+        List<Map<String, Object>> response = new ArrayList<>();
+        for (Department department : departments) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("departmentId", department.getDepartmentId());
+            map.put("departmentName", department.getDepartmentName());
+            map.put("noOfSeats", department.getNoOfSeats());
+            map.put("cutoffRank", department.getCutoffRank());
+
+            College college = department.getCollege();
+            map.put("collegeId", college.getCollegeId());
+            map.put("collegeName", college.getCollegeName());
+            map.put("collegeLocation", college.getLocation());
+
+            response.add(map);
+        }
+
+        return response;
+    }
+
 
     private void updateStudentFields(Student existingStudent, Student student) {
         existingStudent.setStudentName(student.getStudentName());
