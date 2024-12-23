@@ -19,6 +19,7 @@ public class College {
     private String location;
     private String contactInfo;
     private Integer nirfRank;
+    private String logo;
     private Boolean status; // isBlocked
 
     @OneToMany(mappedBy = "college", cascade = CascadeType.ALL)
@@ -27,12 +28,13 @@ public class College {
 
     public College() {}
 
-    public College(Long collegeId, String collegeName, String location, String contactInfo, Integer nirfRank, Boolean status, List<Department> departments) {
+    public College(Long collegeId, String collegeName, String location, String contactInfo, Integer nirfRank, String logo, Boolean status, List<Department> departments) {
         this.collegeId = collegeId;
         this.collegeName = collegeName;
         this.location = location;
         this.contactInfo = contactInfo;
         this.nirfRank = nirfRank;
+        this.logo = logo;
         this.status = status;
         this.departments = departments;
     }
@@ -75,6 +77,14 @@ public class College {
 
     public void setNirfRank(Integer nirfRank) {
         this.nirfRank = nirfRank;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public Boolean getStatus() {

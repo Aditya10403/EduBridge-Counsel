@@ -59,6 +59,7 @@ public class CollegeServiceImpl implements CollegeService {
         existingCollege.setLocation(c.getLocation());
         existingCollege.setContactInfo(c.getContactInfo());
         existingCollege.setNirfRank(c.getNirfRank());
+        existingCollege.setLogo(c.getLogo());
         existingCollege.setStatus(c.getStatus());
 
         College updatedCollege = collegeRepository.save(existingCollege);

@@ -7,7 +7,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long studentId;
 
     private String studentName;
     private String contactNumber;
@@ -17,13 +17,13 @@ public class Student {
     private String mailId;
     private Double tenthMarks;
     private Double twelveMarks;
+    private String img;
     private Integer erank;
 
-    public Student() {
-    }
+    public Student() { }
 
-    public Student(Long id, String studentName, String contactNumber, String address, String board, String schoolName, String mailId, Double tenthMarks, Double twelveMarks, Integer rank) {
-        this.id = id;
+    public Student(Long studentId, String studentName, String contactNumber, String address, String board, String schoolName, String mailId, Double tenthMarks, Double twelveMarks, String img, Integer erank) {
+        this.studentId = studentId;
         this.studentName = studentName;
         this.contactNumber = contactNumber;
         this.address = address;
@@ -32,15 +32,16 @@ public class Student {
         this.mailId = mailId;
         this.tenthMarks = tenthMarks;
         this.twelveMarks = twelveMarks;
-        this.erank = rank;
+        this.img = img;
+        this.erank = erank;
     }
 
-    public Long getId() {
-        return id;
+    public Long getStudentId() {
+        return studentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 
     public String getStudentName() {
@@ -105,6 +106,14 @@ public class Student {
 
     public void setTwelveMarks(Double twelveMarks) {
         this.twelveMarks = twelveMarks;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public Integer getErank() {

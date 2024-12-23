@@ -103,12 +103,14 @@ public class StudentServiceImpl implements StudentService {
 
     private void updateStudentFields(Student existingStudent, Student student) {
         existingStudent.setStudentName(student.getStudentName());
+        existingStudent.setContactNumber(student.getContactNumber());
         existingStudent.setAddress(student.getAddress());
         existingStudent.setBoard(student.getBoard());
         existingStudent.setSchoolName(student.getSchoolName());
         existingStudent.setMailId(student.getMailId());
         existingStudent.setTenthMarks(student.getTenthMarks());
         existingStudent.setTwelveMarks(student.getTwelveMarks());
+        existingStudent.setImg(student.getImg());
         existingStudent.setErank(student.getErank());
     }
 }
