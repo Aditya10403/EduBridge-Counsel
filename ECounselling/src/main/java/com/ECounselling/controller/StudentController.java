@@ -35,6 +35,25 @@ public class StudentController {
         }
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse> loginStudent(@RequestBody Map<String, String> credentials) {
+        String mailId = credentials.get("mailId");
+        String password = credentials.get("password");
+
+        try {
+            ApiResponse response = studentService.loginStudent(mailId, password);
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+                    new ApiResponse(
+                            HttpStatus.UNAUTHORIZED.value(),
+                            e.getMessage(),
+                            null
+                    )
+            );
+        }
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<Student>> getAllStudents() {
         List<Student> students = studentService.getAllStudents();

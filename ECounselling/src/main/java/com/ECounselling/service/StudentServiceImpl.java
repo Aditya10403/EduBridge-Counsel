@@ -113,4 +113,21 @@ public class StudentServiceImpl implements StudentService {
         existingStudent.setImg(student.getImg());
         existingStudent.setErank(student.getErank());
     }
+    
+    @Override
+    public ApiResponse loginStudent(String mailId, String password) {
+        Student student = studentRepository.findByMailId(mailId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+
+        // Compare the password
+        if (!student.getPassword().equals(password)) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+
+        return new ApiResponse(
+                HttpStatus.OK.value(),
+                "Login successful",
+                student
+        );
+    }
 }

@@ -14,4 +14,5 @@ public interface StudentService {
     ApiResponse updateStudentByMail(String mailId, Student s);
     ApiResponse verifyMail(String mailId);
     List<Map<String, Object>> getDepartmentsByERank(Integer erank);
+    ApiResponse loginStudent(String mailId, String password);
 }

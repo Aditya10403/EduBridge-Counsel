@@ -19,10 +19,11 @@ public class Student {
     private Double twelveMarks;
     private String img;
     private Integer erank;
+    private String password;
 
     public Student() { }
 
-    public Student(Long studentId, String studentName, String contactNumber, String address, String board, String schoolName, String mailId, Double tenthMarks, Double twelveMarks, String img, Integer erank) {
+    public Student(Long studentId, String studentName, String contactNumber, String address, String board, String schoolName, String mailId, Double tenthMarks, Double twelveMarks, String img, Integer erank, String password) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.contactNumber = contactNumber;
@@ -34,6 +35,7 @@ public class Student {
         this.twelveMarks = twelveMarks;
         this.img = img;
         this.erank = erank;
+        this.password = password;
     }
 
     public Long getStudentId() {
@@ -122,5 +124,13 @@ public class Student {
 
     public void setErank(Integer erank) {
         this.erank = erank;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
